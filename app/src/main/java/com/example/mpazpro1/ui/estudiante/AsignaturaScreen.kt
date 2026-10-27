@@ -24,19 +24,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.mpazpro1.ui.componentes.AsignaturaUi
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 
-// Pantalla provisoria: aquí irán los objetivos de aprendizaje asignados por el docente
+
+// Pantalla de asignatura del estudiante
 @Composable
 fun AsignaturaScreen(
     asignatura: AsignaturaUi,
-    onVolver: () -> Unit
+    onVolver: () -> Unit,
+    onComenzarActividad: () -> Unit
 ) {
-    Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+
+    Scaffold(
+        containerColor = MaterialTheme.colorScheme.background,
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        }
+    ) { innerPadding ->
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+
+            // Encabezado de la asignatura
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -46,13 +66,14 @@ fun AsignaturaScreen(
             ) {
                 IconButton(onClick = onVolver) {
                     Icon(
-                        Icons.AutoMirrored.Filled.ArrowBack,
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Volver",
                         tint = Color.White
                     )
                 }
+
                 Text(
-                    asignatura.nombre,
+                    text = asignatura.nombre,
                     color = Color.White,
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
@@ -60,17 +81,47 @@ fun AsignaturaScreen(
             }
 
             Spacer(Modifier.height(24.dp))
+
+            // Título de la sección
+            Text(
+                text = "Mis objetivos de aprendizaje",
+                modifier = Modifier.padding(horizontal = 16.dp),
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+
+            Spacer(Modifier.height(16.dp))
+
+            // Tarjeta del objetivo de aprendizaje
             Card(
-                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
             ) {
-                Text(
-                    "Aquí verás los objetivos que tu profesor o profesora asigne para esta asignatura.",
-                    modifier = Modifier.padding(20.dp),
-                    style = MaterialTheme.typography.bodyLarge
-                )
+                Column(
+                    modifier = Modifier.padding(20.dp)
+                ) {
+
+                    Text(
+                        text = "Objetivo de aprendizaje 1\n\n" +
+                                "Reconocer las vocales A, E, I, O, U.\n\n" +
+                                "Aprenderemos a identificar las vocales " +
+                                "mediante palabras, imágenes y actividades.",
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+
+                    Spacer(Modifier.height(20.dp))
+
+                    Button(
+                        onClick = onComenzarActividad,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Comenzar actividad")
+                    }
+                }
             }
         }
     }

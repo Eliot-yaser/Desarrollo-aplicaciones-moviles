@@ -16,6 +16,7 @@ import com.example.mpazpro1.ui.bienvenida.BienvenidaScreen
 import com.example.mpazpro1.ui.componentes.asignaturasUi
 import com.example.mpazpro1.ui.docente.HomeDocenteScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
+import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
 import com.example.mpazpro1.ui.login.LoginScreen
 import com.example.mpazpro1.ui.login.LoginViewModel
@@ -113,8 +114,27 @@ fun AppNavigation() {
             val asignatura = asignaturasUi.firstOrNull { it.id == id } ?: asignaturasUi.first()
             AsignaturaScreen(
                 asignatura = asignatura,
-                onVolver = { navController.popBackStack() }
+                onVolver = { navController.popBackStack() },
+                onComenzarActividad = {
+                    navController.navigate(Rutas.actividad(id))
+                }
             )
         }
+
+        composable(
+            route = "${Rutas.ACTIVIDAD}/{${Rutas.ACTIVIDAD_ARG}}",
+            arguments = listOf(
+                navArgument(Rutas.ACTIVIDAD_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { entrada ->
+            ActividadScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
     }
 }

@@ -9,7 +9,9 @@ object Rutas {
     const val HOME_UTP = "home_utp"
 
     const val ASIGNATURA = "asignatura"
+    const val ACTIVIDAD = "actividad"
+    const val ACTIVIDAD_ARG = "asignaturaId"
     const val ASIGNATURA_ARG = "asignaturaId"
-
     fun asignatura(id: Int) = "$ASIGNATURA/$id"
+    fun actividad(id: Int) = "$ACTIVIDAD/$id"
 }
