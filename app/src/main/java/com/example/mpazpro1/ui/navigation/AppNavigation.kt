@@ -28,6 +28,7 @@ import com.example.mpazpro1.ui.login.LoginViewModel
 import com.example.mpazpro1.ui.registro.RegistroScreen
 import com.example.mpazpro1.ui.registro.RegistroViewModel
 import com.example.mpazpro1.ui.utp.HomeUtpScreen
+import com.example.mpazpro1.ui.utp.ConfiguracionCurricularScreen
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -162,7 +163,18 @@ fun AppNavigation() {
         composable(Rutas.HOME_UTP) {
             HomeUtpScreen(
                 nombre = usuario?.nombre.primerNombre(),
-                onCerrarSesion = { cerrarSesion() }
+                onCerrarSesion = { cerrarSesion() },
+                onConfiguracionCurricular = {
+                    navController.navigate(Rutas.CONFIGURACION_CURRICULAR)
+                }
+            )
+        }
+
+        composable(Rutas.CONFIGURACION_CURRICULAR) {
+            ConfiguracionCurricularScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
             )
         }
 
