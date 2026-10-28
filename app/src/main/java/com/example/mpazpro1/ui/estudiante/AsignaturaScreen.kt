@@ -31,6 +31,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import kotlinx.coroutines.launch
+import androidx.compose.material3.OutlinedButton
 
 
 // Pantalla de asignatura del estudiante
@@ -38,7 +39,8 @@ import kotlinx.coroutines.launch
 fun AsignaturaScreen(
     asignatura: AsignaturaUi,
     onVolver: () -> Unit,
-    onComenzarActividad: () -> Unit
+    onComenzarActividad: () -> Unit,
+    onVerDesafios: () -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -153,6 +155,16 @@ fun AsignaturaScreen(
                     ) {
                         Text("Comenzar actividad")
                     }
+
+                    Spacer(Modifier.height(12.dp))
+
+                    OutlinedButton(
+                        onClick = onVerDesafios,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text("Mis desafíos")
+                    }
+
                 }
             }
         }

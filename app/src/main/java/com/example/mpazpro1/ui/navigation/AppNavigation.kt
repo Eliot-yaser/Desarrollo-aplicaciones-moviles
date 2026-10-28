@@ -23,6 +23,7 @@ import com.example.mpazpro1.ui.docente.ConfigurarPruebaFinalScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
+import com.example.mpazpro1.ui.estudiante.DesafiosScreen
 import com.example.mpazpro1.ui.login.LoginScreen
 import com.example.mpazpro1.ui.login.LoginViewModel
 import com.example.mpazpro1.ui.registro.RegistroScreen
@@ -261,6 +262,9 @@ fun AppNavigation() {
                 onVolver = { navController.popBackStack() },
                 onComenzarActividad = {
                     navController.navigate(Rutas.actividad(id))
+                },
+                onVerDesafios = {
+                    navController.navigate(Rutas.desafios(id))
                 }
             )
         }
@@ -282,6 +286,26 @@ fun AppNavigation() {
                     navController.popBackStack()
                 },
                 asignaturaId = asignaturaId
+            )
+        }
+
+        composable(
+            route = "${Rutas.DESAFIOS}/{${Rutas.DESAFIOS_ARG}}",
+            arguments = listOf(
+                navArgument(Rutas.DESAFIOS_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { entrada ->
+
+            val asignaturaId =
+                entrada.arguments?.getInt(Rutas.DESAFIOS_ARG) ?: 1
+
+            DesafiosScreen(
+                asignaturaId = asignaturaId,
+                onVolver = {
+                    navController.popBackStack()
+                }
             )
         }
 
