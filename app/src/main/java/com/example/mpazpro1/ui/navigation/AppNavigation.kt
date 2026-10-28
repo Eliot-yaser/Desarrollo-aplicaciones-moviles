@@ -24,6 +24,8 @@ import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
 import com.example.mpazpro1.ui.estudiante.DesafiosScreen
+import com.example.mpazpro1.ui.estudiante.ContenidoObjetivoScreen
+import com.example.mpazpro1.ui.estudiante.PruebaFinalEstudianteScreen
 import com.example.mpazpro1.ui.estudiante.MiAvanceScreen
 import com.example.mpazpro1.ui.login.LoginScreen
 import com.example.mpazpro1.ui.login.LoginViewModel
@@ -270,7 +272,9 @@ fun AppNavigation() {
                 },
                 onVerDesafios = {
                     navController.navigate(Rutas.desafios(id))
-                }
+                },
+                onVerContenido = { navController.navigate(Rutas.contenido(id)) },
+                onPruebaFinal = { navController.navigate(Rutas.pruebaEstudiante(id)) }
             )
         }
 
@@ -312,6 +316,38 @@ fun AppNavigation() {
                     navController.popBackStack()
                 }
             )
+        }
+
+        composable(
+            route = "${Rutas.CONTENIDO_OBJETIVO}/{${Rutas.ASIGNATURA_ARG}}",
+            arguments = listOf(navArgument(Rutas.ASIGNATURA_ARG) { type = NavType.IntType })
+        ) { entrada ->
+            val id = entrada.arguments?.getInt(Rutas.ASIGNATURA_ARG) ?: 1
+            if (id in 1..4) {
+                ContenidoObjetivoScreen(
+                    asignaturaId = id,
+                    onVolver = { navController.popBackStack() },
+                    onActividad = { navController.navigate(Rutas.actividad(id)) }
+                )
+            } else {
+                androidx.compose.material3.TextButton(onClick = { navController.popBackStack() }) {
+                    androidx.compose.material3.Text("Asignatura no disponible. Volver")
+                }
+            }
+        }
+
+        composable(
+            route = "${Rutas.PRUEBA_ESTUDIANTE}/{${Rutas.ASIGNATURA_ARG}}",
+            arguments = listOf(navArgument(Rutas.ASIGNATURA_ARG) { type = NavType.IntType })
+        ) { entrada ->
+            val id = entrada.arguments?.getInt(Rutas.ASIGNATURA_ARG) ?: 1
+            if (id in 1..4) {
+                PruebaFinalEstudianteScreen(asignaturaId = id, onVolver = { navController.popBackStack() })
+            } else {
+                androidx.compose.material3.TextButton(onClick = { navController.popBackStack() }) {
+                    androidx.compose.material3.Text("Asignatura no disponible. Volver")
+                }
+            }
         }
 
         composable(Rutas.MI_AVANCE) {

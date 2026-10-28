@@ -29,8 +29,13 @@ object Rutas {
     const val ASIGNATURA_ARG = "asignaturaId"
 
     const val DESAFIOS = "desafios"
+    const val CONTENIDO_OBJETIVO = "contenido_objetivo"
+    const val PRUEBA_ESTUDIANTE = "prueba_estudiante"
     const val MI_AVANCE = "mi_avance"
     const val DESAFIOS_ARG = "asignaturaId"
+
+    fun contenido(id: Int) = "$CONTENIDO_OBJETIVO/$id"
+    fun pruebaEstudiante(id: Int) = "$PRUEBA_ESTUDIANTE/$id"
 
     fun desafios(id: Int) = "$DESAFIOS/$id"
 

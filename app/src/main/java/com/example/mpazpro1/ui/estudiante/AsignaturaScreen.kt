@@ -1,5 +1,7 @@
 package com.example.mpazpro1.ui.estudiante
 
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +42,9 @@ fun AsignaturaScreen(
     asignatura: AsignaturaUi,
     onVolver: () -> Unit,
     onComenzarActividad: () -> Unit,
-    onVerDesafios: () -> Unit
+    onVerDesafios: () -> Unit,
+    onVerContenido: () -> Unit,
+    onPruebaFinal: () -> Unit
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -56,6 +60,7 @@ fun AsignaturaScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
+                .verticalScroll(rememberScrollState())
         ) {
 
             // Encabezado de la asignatura
@@ -107,45 +112,16 @@ fun AsignaturaScreen(
                     modifier = Modifier.padding(20.dp)
                 ) {
 
-                    Text(
-                        text = when (asignatura.id) {
-                            1 -> {
-                                "Objetivo de aprendizaje 1\n\n" +
-                                        "Reconocer las vocales A, E, I, O, U.\n\n" +
-                                        "Aprenderemos a identificar las vocales " +
-                                        "en palabras y ejemplos cotidianos."
-                            }
-
-                            2 -> {
-                                "Objetivo de aprendizaje 1\n\n" +
-                                        "Reconocer números del 1 al 10 " +
-                                        "y resolver sumas sencillas.\n\n" +
-                                        "Aprenderemos a contar objetos " +
-                                        "y realizar pequeñas operaciones."
-                            }
-
-                            3 -> {
-                                "Objetivo de aprendizaje 1\n\n" +
-                                        "Reconocer seres vivos y elementos " +
-                                        "no vivos de nuestro entorno.\n\n" +
-                                        "Aprenderemos a observar la naturaleza " +
-                                        "y descubrir sus características."
-                            }
-
-                            4 -> {
-                                "Objetivo de aprendizaje 1\n\n" +
-                                        "Reconocer lugares de nuestra comunidad " +
-                                        "y normas básicas de convivencia.\n\n" +
-                                        "Aprenderemos sobre nuestra familia, " +
-                                        "escuela y comunidad."
-                            }
-
-                            else -> {
-                                "Selecciona un objetivo de aprendizaje."
-                            }
-                        },
-                        style = MaterialTheme.typography.bodyLarge
-                    )
+                    val contenido = aprendizajeDemo(asignatura.id)
+                    Text(contenido.unidad, style = MaterialTheme.typography.titleMedium)
+                    Spacer(Modifier.height(12.dp))
+                    Text(contenido.objetivo, style = MaterialTheme.typography.bodyLarge)
+                    Spacer(Modifier.height(8.dp))
+                    Text("Objetivo asignado de demostración · Datos ficticios", style = MaterialTheme.typography.bodySmall)
+                    Spacer(Modifier.height(12.dp))
+                    OutlinedButton(onClick = onVerContenido, modifier = Modifier.fillMaxWidth()) {
+                        Text("Ver contenido y ejemplos")
+                    }
 
                     Spacer(Modifier.height(20.dp))
 
@@ -164,6 +140,11 @@ fun AsignaturaScreen(
                     ) {
                         Text("Mis desafíos")
                     }
+                    Spacer(Modifier.height(12.dp))
+                    Button(onClick = onPruebaFinal, modifier = Modifier.fillMaxWidth()) {
+                        Text("Prueba final")
+                    }
+
 
                 }
             }
