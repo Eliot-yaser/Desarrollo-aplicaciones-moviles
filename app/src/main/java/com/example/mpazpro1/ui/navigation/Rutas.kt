@@ -10,6 +10,7 @@ object Rutas {
 
     const val ASIGNAR_OBJETIVOS = "asignar_objetivos"
     const val MIS_CURSOS = "mis_cursos"
+    const val INFORME_RENDIMIENTO = "informe_rendimiento"
 
 
     const val ASIGNATURA = "asignatura"

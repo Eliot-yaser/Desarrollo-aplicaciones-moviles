@@ -14,7 +14,8 @@ fun HomeDocenteScreen(
     nombre: String,
     onCerrarSesion: () -> Unit,
     onAsignarObjetivos: () -> Unit,
-    onMisCursos: () -> Unit
+    onMisCursos: () -> Unit,
+    onInformeRendimiento: () -> Unit
 ) {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
@@ -26,7 +27,12 @@ fun HomeDocenteScreen(
                 icono = Icons.Filled.Groups,
                 onClick = onMisCursos
             ),
-            OpcionPanel("Informes de rendimiento", "Revisa el progreso de tus estudiantes", Icons.Filled.Assessment),
+            OpcionPanel(
+                titulo = "Informes de rendimiento",
+                descripcion = "Revisa el progreso de tus estudiantes",
+                icono = Icons.Filled.Assessment,
+                onClick = onInformeRendimiento
+            ),
             OpcionPanel(
                 titulo = "Asignar objetivos",
                 descripcion = "Configura los OA por asignatura",

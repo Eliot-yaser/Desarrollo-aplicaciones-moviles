@@ -17,6 +17,7 @@ import com.example.mpazpro1.ui.componentes.asignaturasUi
 import com.example.mpazpro1.ui.docente.HomeDocenteScreen
 import com.example.mpazpro1.ui.docente.AsignarObjetivosScreen
 import com.example.mpazpro1.ui.docente.MisCursosScreen
+import com.example.mpazpro1.ui.docente.InformeRendimientoScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
@@ -103,6 +104,9 @@ fun AppNavigation() {
                 },
                 onMisCursos = {
                     navController.navigate(Rutas.MIS_CURSOS)
+                },
+                onInformeRendimiento = {
+                    navController.navigate(Rutas.INFORME_RENDIMIENTO)
                 }
             )
         }
@@ -117,6 +121,14 @@ fun AppNavigation() {
 
         composable(Rutas.MIS_CURSOS) {
             MisCursosScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Rutas.INFORME_RENDIMIENTO) {
+            InformeRendimientoScreen(
                 onVolver = {
                     navController.popBackStack()
                 }
