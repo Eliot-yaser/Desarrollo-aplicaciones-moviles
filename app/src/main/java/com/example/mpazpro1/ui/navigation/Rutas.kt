@@ -9,6 +9,8 @@ object Rutas {
     const val HOME_UTP = "home_utp"
 
     const val ASIGNAR_OBJETIVOS = "asignar_objetivos"
+    const val MIS_CURSOS = "mis_cursos"
+
 
     const val ASIGNATURA = "asignatura"
     const val ACTIVIDAD = "actividad"

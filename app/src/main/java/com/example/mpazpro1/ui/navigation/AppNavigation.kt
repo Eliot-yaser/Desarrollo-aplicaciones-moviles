@@ -16,6 +16,7 @@ import com.example.mpazpro1.ui.bienvenida.BienvenidaScreen
 import com.example.mpazpro1.ui.componentes.asignaturasUi
 import com.example.mpazpro1.ui.docente.HomeDocenteScreen
 import com.example.mpazpro1.ui.docente.AsignarObjetivosScreen
+import com.example.mpazpro1.ui.docente.MisCursosScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
@@ -99,11 +100,12 @@ fun AppNavigation() {
                 onCerrarSesion = { cerrarSesion() },
                 onAsignarObjetivos = {
                     navController.navigate(Rutas.ASIGNAR_OBJETIVOS)
+                },
+                onMisCursos = {
+                    navController.navigate(Rutas.MIS_CURSOS)
                 }
             )
         }
-
-
 
         composable(Rutas.ASIGNAR_OBJETIVOS) {
             AsignarObjetivosScreen(
@@ -113,6 +115,13 @@ fun AppNavigation() {
             )
         }
 
+        composable(Rutas.MIS_CURSOS) {
+            MisCursosScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
 
         composable(Rutas.HOME_UTP) {
             HomeUtpScreen(
