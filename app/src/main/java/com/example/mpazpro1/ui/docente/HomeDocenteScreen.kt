@@ -15,7 +15,8 @@ fun HomeDocenteScreen(
     onCerrarSesion: () -> Unit,
     onAsignarObjetivos: () -> Unit,
     onMisCursos: () -> Unit,
-    onInformeRendimiento: () -> Unit
+    onInformeRendimiento: () -> Unit,
+    onRecursosEducativos: () -> Unit
 ) {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
@@ -39,7 +40,13 @@ fun HomeDocenteScreen(
                 icono = Icons.Filled.Checklist,
                 onClick = onAsignarObjetivos
             ),
-            OpcionPanel("Recursos", "Material de apoyo y guías", Icons.Filled.Folder)
+
+            OpcionPanel(
+                titulo = "Recursos",
+                descripcion = "Material de apoyo y guías",
+                icono = Icons.Filled.Folder,
+                onClick = onRecursosEducativos
+            )
         ),
         onCerrarSesion = onCerrarSesion
     )

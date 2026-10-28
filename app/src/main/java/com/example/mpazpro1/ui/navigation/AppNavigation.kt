@@ -18,6 +18,7 @@ import com.example.mpazpro1.ui.docente.HomeDocenteScreen
 import com.example.mpazpro1.ui.docente.AsignarObjetivosScreen
 import com.example.mpazpro1.ui.docente.MisCursosScreen
 import com.example.mpazpro1.ui.docente.InformeRendimientoScreen
+import com.example.mpazpro1.ui.docente.RecursosEducativosScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
@@ -107,6 +108,9 @@ fun AppNavigation() {
                 },
                 onInformeRendimiento = {
                     navController.navigate(Rutas.INFORME_RENDIMIENTO)
+                },
+                onRecursosEducativos = {
+                    navController.navigate(Rutas.RECURSOS_EDUCATIVOS)
                 }
             )
         }
@@ -129,6 +133,14 @@ fun AppNavigation() {
 
         composable(Rutas.INFORME_RENDIMIENTO) {
             InformeRendimientoScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Rutas.RECURSOS_EDUCATIVOS) {
+            RecursosEducativosScreen(
                 onVolver = {
                     navController.popBackStack()
                 }
