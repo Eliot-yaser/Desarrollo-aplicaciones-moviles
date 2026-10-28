@@ -13,7 +13,8 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun AsignarObjetivosScreen(
-    onVolver: () -> Unit
+    onVolver: () -> Unit,
+    onConfigurarPruebaFinal: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -28,13 +29,17 @@ fun AsignarObjetivosScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .safeDrawingPadding()
             .verticalScroll(rememberScrollState())
             .padding(20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
 
-        TextButton(onClick = onVolver) {
-            Text("← Volver")
+        OutlinedButton(
+            onClick = onVolver,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("← Volver al panel docente")
         }
 
         Text(
@@ -109,6 +114,13 @@ fun AsignarObjetivosScreen(
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
+
+        OutlinedButton(
+            onClick = onConfigurarPruebaFinal,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text("Configurar prueba final")
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 

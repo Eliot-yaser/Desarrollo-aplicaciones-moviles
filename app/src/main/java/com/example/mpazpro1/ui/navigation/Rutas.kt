@@ -12,6 +12,7 @@ object Rutas {
     const val MIS_CURSOS = "mis_cursos"
     const val INFORME_RENDIMIENTO = "informe_rendimiento"
     const val RECURSOS_EDUCATIVOS = "recursos_educativos"
+    const val CONFIGURAR_PRUEBA_FINAL = "configurar_prueba_final"
 
 
     const val ASIGNATURA = "asignatura"
