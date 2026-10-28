@@ -23,7 +23,8 @@ private data class ContenidoRevision(
 
 @Composable
 fun RevisionContenidosScreen(
-    onVolver: () -> Unit
+    onVolver: () -> Unit,
+    onCrearContenido: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -190,6 +191,13 @@ fun RevisionContenidosScreen(
                         )
                     }
                 }
+            }
+
+            Button(
+                onClick = onCrearContenido,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Crear contenido educativo")
             }
 
             OutlinedButton(

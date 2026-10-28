@@ -30,6 +30,7 @@ import com.example.mpazpro1.ui.registro.RegistroViewModel
 import com.example.mpazpro1.ui.utp.HomeUtpScreen
 import com.example.mpazpro1.ui.utp.ConfiguracionCurricularScreen
 import com.example.mpazpro1.ui.utp.RevisionContenidosScreen
+import com.example.mpazpro1.ui.utp.EditorContenidosScreen
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -184,6 +185,17 @@ fun AppNavigation() {
 
         composable(Rutas.REVISION_CONTENIDOS) {
             RevisionContenidosScreen(
+                onVolver = {
+                    navController.popBackStack()
+                },
+                onCrearContenido = {
+                    navController.navigate(Rutas.EDITOR_CONTENIDOS)
+                }
+            )
+        }
+
+        composable(Rutas.EDITOR_CONTENIDOS) {
+            EditorContenidosScreen(
                 onVolver = {
                     navController.popBackStack()
                 }

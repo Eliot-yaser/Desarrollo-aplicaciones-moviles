@@ -16,6 +16,7 @@ object Rutas {
 
     const val CONFIGURACION_CURRICULAR = "configuracion_curricular"
     const val REVISION_CONTENIDOS = "revision_contenidos"
+    const val EDITOR_CONTENIDOS = "editor_contenidos"
 
 
     const val ASIGNATURA = "asignatura"
