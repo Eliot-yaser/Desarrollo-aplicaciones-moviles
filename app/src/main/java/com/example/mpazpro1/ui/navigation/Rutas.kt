@@ -19,6 +19,7 @@ object Rutas {
     const val EDITOR_CONTENIDOS = "editor_contenidos"
     const val EDITOR_ACTIVIDADES = "editor_actividades"
     const val EDITOR_PRUEBA_FINAL = "editor_prueba_final"
+    const val REPORTES_GENERALES = "reportes_generales"
 
 
     const val ASIGNATURA = "asignatura"
