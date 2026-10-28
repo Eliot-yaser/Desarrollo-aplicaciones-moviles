@@ -25,7 +25,8 @@ private data class ContenidoRevision(
 fun RevisionContenidosScreen(
     onVolver: () -> Unit,
     onCrearContenido: () -> Unit,
-    onCrearActividad: () -> Unit
+    onCrearActividad: () -> Unit,
+    onCrearPruebaFinal: () -> Unit
 ) {
     val context = LocalContext.current
 
@@ -206,6 +207,13 @@ fun RevisionContenidosScreen(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Crear actividad o desafío")
+            }
+
+            Button(
+                onClick = onCrearPruebaFinal,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Crear prueba final")
             }
 
             OutlinedButton(

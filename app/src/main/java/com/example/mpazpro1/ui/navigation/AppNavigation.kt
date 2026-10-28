@@ -32,6 +32,7 @@ import com.example.mpazpro1.ui.utp.ConfiguracionCurricularScreen
 import com.example.mpazpro1.ui.utp.RevisionContenidosScreen
 import com.example.mpazpro1.ui.utp.EditorContenidosScreen
 import com.example.mpazpro1.ui.utp.EditorActividadesScreen
+import com.example.mpazpro1.ui.utp.EditorPruebaFinalScreen
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -194,6 +195,9 @@ fun AppNavigation() {
                 },
                 onCrearActividad = {
                     navController.navigate(Rutas.EDITOR_ACTIVIDADES)
+                },
+                onCrearPruebaFinal = {
+                    navController.navigate(Rutas.EDITOR_PRUEBA_FINAL)
                 }
             )
         }
@@ -208,6 +212,14 @@ fun AppNavigation() {
 
         composable(Rutas.EDITOR_ACTIVIDADES) {
             EditorActividadesScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Rutas.EDITOR_PRUEBA_FINAL) {
+            EditorPruebaFinalScreen(
                 onVolver = {
                     navController.popBackStack()
                 }
