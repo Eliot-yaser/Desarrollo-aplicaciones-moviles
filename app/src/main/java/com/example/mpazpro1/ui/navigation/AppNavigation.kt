@@ -24,6 +24,7 @@ import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
 import com.example.mpazpro1.ui.estudiante.DesafiosScreen
+import com.example.mpazpro1.ui.estudiante.MiAvanceScreen
 import com.example.mpazpro1.ui.login.LoginScreen
 import com.example.mpazpro1.ui.login.LoginViewModel
 import com.example.mpazpro1.ui.registro.RegistroScreen
@@ -101,7 +102,11 @@ fun AppNavigation() {
             HomeEstudianteScreen(
                 nombre = usuario?.nombre.primerNombre(),
                 onAsignatura = { id -> navController.navigate(Rutas.asignatura(id)) },
-                onCerrarSesion = { cerrarSesion() }
+                onCerrarSesion = { cerrarSesion() },
+                onVerAvance = {
+                    navController.navigate(Rutas.MI_AVANCE)
+                }
+
             )
         }
 
@@ -308,6 +313,15 @@ fun AppNavigation() {
                 }
             )
         }
+
+        composable(Rutas.MI_AVANCE) {
+            MiAvanceScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
 
     }
 }

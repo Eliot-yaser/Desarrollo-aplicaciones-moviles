@@ -29,6 +29,7 @@ object Rutas {
     const val ASIGNATURA_ARG = "asignaturaId"
 
     const val DESAFIOS = "desafios"
+    const val MI_AVANCE = "mi_avance"
     const val DESAFIOS_ARG = "asignaturaId"
 
     fun desafios(id: Int) = "$DESAFIOS/$id"

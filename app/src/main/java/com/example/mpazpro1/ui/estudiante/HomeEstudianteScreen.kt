@@ -21,6 +21,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,7 +37,8 @@ import com.example.mpazpro1.ui.componentes.asignaturasUi
 fun HomeEstudianteScreen(
     nombre: String,
     onAsignatura: (Int) -> Unit,
-    onCerrarSesion: () -> Unit
+    onCerrarSesion: () -> Unit,
+    onVerAvance: () -> Unit
 ) {
     Scaffold(containerColor = MaterialTheme.colorScheme.background) { innerPadding ->
         Column(
@@ -64,6 +66,15 @@ fun HomeEstudianteScreen(
             }
 
             Spacer(Modifier.height(16.dp))
+
+            Button(
+                onClick = onVerAvance,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Mi avance")
+            }
+
+            Spacer(Modifier.height(12.dp))
 
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
