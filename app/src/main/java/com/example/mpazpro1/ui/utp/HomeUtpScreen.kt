@@ -13,13 +13,19 @@ import com.example.mpazpro1.ui.componentes.PanelRolScreen
 fun HomeUtpScreen(
     nombre: String,
     onCerrarSesion: () -> Unit,
-    onConfiguracionCurricular: () -> Unit
+    onConfiguracionCurricular: () -> Unit,
+    onRevisionContenidos: () -> Unit
 ) {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
         subtitulo = "Unidad Técnico Pedagógica",
         opciones = listOf(
-            OpcionPanel("Revisión de contenidos", "Evalúa y autoriza materiales", Icons.Filled.FactCheck),
+            OpcionPanel(
+                titulo = "Revisión de contenidos",
+                descripcion = "Evalúa y autoriza materiales",
+                icono = Icons.Filled.FactCheck,
+                onClick = onRevisionContenidos
+            ),
             OpcionPanel("Reportes generales", "Visualiza el rendimiento por curso", Icons.Filled.Assessment),
             OpcionPanel("Gestión de docentes", "Administra usuarios y asignaturas", Icons.Filled.Groups),
             OpcionPanel(

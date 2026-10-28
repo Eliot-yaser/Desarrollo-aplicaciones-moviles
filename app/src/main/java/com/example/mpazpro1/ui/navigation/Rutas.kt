@@ -15,6 +15,7 @@ object Rutas {
     const val CONFIGURAR_PRUEBA_FINAL = "configurar_prueba_final"
 
     const val CONFIGURACION_CURRICULAR = "configuracion_curricular"
+    const val REVISION_CONTENIDOS = "revision_contenidos"
 
 
     const val ASIGNATURA = "asignatura"

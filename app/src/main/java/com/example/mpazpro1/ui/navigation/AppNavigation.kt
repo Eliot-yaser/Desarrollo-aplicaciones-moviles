@@ -29,6 +29,7 @@ import com.example.mpazpro1.ui.registro.RegistroScreen
 import com.example.mpazpro1.ui.registro.RegistroViewModel
 import com.example.mpazpro1.ui.utp.HomeUtpScreen
 import com.example.mpazpro1.ui.utp.ConfiguracionCurricularScreen
+import com.example.mpazpro1.ui.utp.RevisionContenidosScreen
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -166,12 +167,23 @@ fun AppNavigation() {
                 onCerrarSesion = { cerrarSesion() },
                 onConfiguracionCurricular = {
                     navController.navigate(Rutas.CONFIGURACION_CURRICULAR)
+                },
+                onRevisionContenidos = {
+                    navController.navigate(Rutas.REVISION_CONTENIDOS)
                 }
             )
         }
 
         composable(Rutas.CONFIGURACION_CURRICULAR) {
             ConfiguracionCurricularScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Rutas.REVISION_CONTENIDOS) {
+            RevisionContenidosScreen(
                 onVolver = {
                     navController.popBackStack()
                 }
