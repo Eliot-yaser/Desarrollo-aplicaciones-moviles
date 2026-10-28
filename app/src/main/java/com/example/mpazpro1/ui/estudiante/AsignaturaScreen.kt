@@ -106,10 +106,42 @@ fun AsignaturaScreen(
                 ) {
 
                     Text(
-                        text = "Objetivo de aprendizaje 1\n\n" +
-                                "Reconocer las vocales A, E, I, O, U.\n\n" +
-                                "Aprenderemos a identificar las vocales " +
-                                "mediante palabras, imágenes y actividades.",
+                        text = when (asignatura.id) {
+                            1 -> {
+                                "Objetivo de aprendizaje 1\n\n" +
+                                        "Reconocer las vocales A, E, I, O, U.\n\n" +
+                                        "Aprenderemos a identificar las vocales " +
+                                        "en palabras y ejemplos cotidianos."
+                            }
+
+                            2 -> {
+                                "Objetivo de aprendizaje 1\n\n" +
+                                        "Reconocer números del 1 al 10 " +
+                                        "y resolver sumas sencillas.\n\n" +
+                                        "Aprenderemos a contar objetos " +
+                                        "y realizar pequeñas operaciones."
+                            }
+
+                            3 -> {
+                                "Objetivo de aprendizaje 1\n\n" +
+                                        "Reconocer seres vivos y elementos " +
+                                        "no vivos de nuestro entorno.\n\n" +
+                                        "Aprenderemos a observar la naturaleza " +
+                                        "y descubrir sus características."
+                            }
+
+                            4 -> {
+                                "Objetivo de aprendizaje 1\n\n" +
+                                        "Reconocer lugares de nuestra comunidad " +
+                                        "y normas básicas de convivencia.\n\n" +
+                                        "Aprenderemos sobre nuestra familia, " +
+                                        "escuela y comunidad."
+                            }
+
+                            else -> {
+                                "Selecciona un objetivo de aprendizaje."
+                            }
+                        },
                         style = MaterialTheme.typography.bodyLarge
                     )
 

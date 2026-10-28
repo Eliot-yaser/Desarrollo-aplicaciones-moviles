@@ -273,10 +273,15 @@ fun AppNavigation() {
                 }
             )
         ) { entrada ->
+
+            val asignaturaId =
+                entrada.arguments?.getInt(Rutas.ACTIVIDAD_ARG) ?: 1
+
             ActividadScreen(
                 onVolver = {
                     navController.popBackStack()
-                }
+                },
+                asignaturaId = asignaturaId
             )
         }
 
