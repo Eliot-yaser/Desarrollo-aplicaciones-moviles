@@ -32,10 +32,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
+
 data class OpcionPanel(
     val titulo: String,
     val descripcion: String,
-    val icono: ImageVector
+    val icono: ImageVector,
+    val onClick: (() -> Unit)? = null
 )
 
 /**
@@ -86,10 +88,19 @@ fun PanelRolScreen(
                 items(opciones) { opcion ->
                     Card(
                         onClick = {
-                            scope.launch {
-                                snackbarHostState.showSnackbar("Esta opción estará disponible en el siguiente avance")
+                            val accion = opcion.onClick
+
+                            if (accion != null) {
+                                accion()
+                            } else {
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        "Para una futura actualización"
+                                    )
+                                }
                             }
                         },
+
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                         modifier = Modifier.fillMaxWidth()
                     ) {

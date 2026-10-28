@@ -12,15 +12,22 @@ import com.example.mpazpro1.ui.componentes.PanelRolScreen
 @Composable
 fun HomeDocenteScreen(
     nombre: String,
-    onCerrarSesion: () -> Unit
-) {
+    onCerrarSesion: () -> Unit,
+    onAsignarObjetivos: () -> Unit
+)
+ {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
         subtitulo = "Panel docente · Escuela Escritora Marcela Paz",
         opciones = listOf(
             OpcionPanel("Mis cursos", "Gestiona tus cursos y asignaturas", Icons.Filled.Groups),
             OpcionPanel("Informes de rendimiento", "Revisa el progreso de tus estudiantes", Icons.Filled.Assessment),
-            OpcionPanel("Asignar objetivos", "Configura los OA por asignatura", Icons.Filled.Checklist),
+            OpcionPanel(
+                titulo = "Asignar objetivos",
+                descripcion = "Configura los OA por asignatura",
+                icono = Icons.Filled.Checklist,
+                onClick = onAsignarObjetivos
+            ),
             OpcionPanel("Recursos", "Material de apoyo y guías", Icons.Filled.Folder)
         ),
         onCerrarSesion = onCerrarSesion

@@ -15,6 +15,7 @@ import com.example.mpazpro1.domain.Roles
 import com.example.mpazpro1.ui.bienvenida.BienvenidaScreen
 import com.example.mpazpro1.ui.componentes.asignaturasUi
 import com.example.mpazpro1.ui.docente.HomeDocenteScreen
+import com.example.mpazpro1.ui.docente.AsignarObjetivosScreen
 import com.example.mpazpro1.ui.estudiante.AsignaturaScreen
 import com.example.mpazpro1.ui.estudiante.ActividadScreen
 import com.example.mpazpro1.ui.estudiante.HomeEstudianteScreen
@@ -95,9 +96,23 @@ fun AppNavigation() {
         composable(Rutas.HOME_DOCENTE) {
             HomeDocenteScreen(
                 nombre = usuario?.nombre.primerNombre(),
-                onCerrarSesion = { cerrarSesion() }
+                onCerrarSesion = { cerrarSesion() },
+                onAsignarObjetivos = {
+                    navController.navigate(Rutas.ASIGNAR_OBJETIVOS)
+                }
             )
         }
+
+
+
+        composable(Rutas.ASIGNAR_OBJETIVOS) {
+            AsignarObjetivosScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
 
         composable(Rutas.HOME_UTP) {
             HomeUtpScreen(
