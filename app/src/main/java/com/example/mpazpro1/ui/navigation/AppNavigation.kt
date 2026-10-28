@@ -34,6 +34,7 @@ import com.example.mpazpro1.ui.utp.EditorContenidosScreen
 import com.example.mpazpro1.ui.utp.EditorActividadesScreen
 import com.example.mpazpro1.ui.utp.EditorPruebaFinalScreen
 import com.example.mpazpro1.ui.utp.ReportesGeneralesScreen
+import com.example.mpazpro1.ui.utp.GestionDocentesScreen
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -177,6 +178,9 @@ fun AppNavigation() {
                 },
                 onReportesGenerales = {
                     navController.navigate(Rutas.REPORTES_GENERALES)
+                },
+                onGestionDocentes = {
+                    navController.navigate(Rutas.GESTION_DOCENTES)
                 }
             )
         }
@@ -232,6 +236,14 @@ fun AppNavigation() {
 
         composable(Rutas.REPORTES_GENERALES) {
             ReportesGeneralesScreen(
+                onVolver = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Rutas.GESTION_DOCENTES) {
+            GestionDocentesScreen(
                 onVolver = {
                     navController.popBackStack()
                 }

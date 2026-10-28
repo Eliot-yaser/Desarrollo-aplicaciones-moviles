@@ -15,7 +15,8 @@ fun HomeUtpScreen(
     onCerrarSesion: () -> Unit,
     onConfiguracionCurricular: () -> Unit,
     onRevisionContenidos: () -> Unit,
-    onReportesGenerales: () -> Unit
+    onReportesGenerales: () -> Unit,
+    onGestionDocentes: () -> Unit
 ) {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
@@ -33,7 +34,14 @@ fun HomeUtpScreen(
                 icono = Icons.Filled.Assessment,
                 onClick = onReportesGenerales
             ),
-            OpcionPanel("Gestión de docentes", "Administra usuarios y asignaturas", Icons.Filled.Groups),
+
+            OpcionPanel(
+                titulo = "Gestión de docentes",
+                descripcion = "Administra usuarios y asignaturas",
+                icono = Icons.Filled.Groups,
+                onClick = onGestionDocentes
+            ),
+
             OpcionPanel(
                 titulo = "Configuración curricular",
                 descripcion = "Alinea con el plan de estudios",
