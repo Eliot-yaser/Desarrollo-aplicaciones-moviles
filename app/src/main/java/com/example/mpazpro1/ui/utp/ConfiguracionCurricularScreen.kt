@@ -9,6 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import android.app.DatePickerDialog
+import androidx.compose.foundation.clickable
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
+import java.util.Calendar
+import java.util.Locale
 
 @Composable
 fun ConfiguracionCurricularScreen(
@@ -61,8 +67,12 @@ fun ConfiguracionCurricularScreen(
         mutableStateOf("")
     }
 
-    var versionFecha by remember {
+    var fecha by remember {
         mutableStateOf("")
+    }
+
+    val calendario = remember {
+        Calendar.getInstance()
     }
 
     var estado by remember {
@@ -302,12 +312,48 @@ fun ConfiguracionCurricularScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            OutlinedTextField(
-                value = versionFecha,
-                onValueChange = { versionFecha = it },
-                label = { Text("Versión o fecha") },
-                modifier = Modifier.fillMaxWidth()
-            )
+            Box(modifier = Modifier.fillMaxWidth()) {
+                OutlinedTextField(
+                    value = fecha,
+                    onValueChange = {},
+                    readOnly = true,
+                    singleLine = true,
+                    label = { Text("Fecha") },
+                    placeholder = { Text("Seleccionar fecha") },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = Icons.Filled.CalendarMonth,
+                            contentDescription = null
+                        )
+                    },
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                // Permite abrir el calendario al tocar cualquier parte del campo.
+                Box(
+                    modifier = Modifier
+                        .matchParentSize()
+                        .clickable {
+                            DatePickerDialog(
+                                context,
+                                { _, anio, mes, dia ->
+                                    calendario.set(anio, mes, dia)
+
+                                    fecha = String.format(
+                                        Locale.getDefault(),
+                                        "%02d/%02d/%04d",
+                                        dia,
+                                        mes + 1,
+                                        anio
+                                    )
+                                },
+                                calendario.get(Calendar.YEAR),
+                                calendario.get(Calendar.MONTH),
+                                calendario.get(Calendar.DAY_OF_MONTH)
+                            ).show()
+                        }
+                )
+            }
 
             // Estado curricular
             var expandido by remember {

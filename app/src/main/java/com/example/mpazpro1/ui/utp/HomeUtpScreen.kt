@@ -8,6 +8,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import com.example.mpazpro1.ui.componentes.OpcionPanel
 import com.example.mpazpro1.ui.componentes.PanelRolScreen
+import androidx.compose.material.icons.filled.Folder
+
 
 @Composable
 fun HomeUtpScreen(
@@ -16,12 +18,19 @@ fun HomeUtpScreen(
     onConfiguracionCurricular: () -> Unit,
     onRevisionContenidos: () -> Unit,
     onReportesGenerales: () -> Unit,
-    onGestionDocentes: () -> Unit
+    onGestionDocentes: () -> Unit,
+    onRecursosEducativos: () -> Unit
 ) {
     PanelRolScreen(
         saludo = "¡Hola, $nombre!",
         subtitulo = "Unidad Técnico Pedagógica",
         opciones = listOf(
+            OpcionPanel(
+                titulo = "Recursos educativos",
+                descripcion = "Publica recursos y revisa los envíos docentes",
+                icono = Icons.Filled.Folder,
+                onClick = onRecursosEducativos
+            ),
             OpcionPanel(
                 titulo = "Revisión de contenidos",
                 descripcion = "Evalúa y autoriza materiales",

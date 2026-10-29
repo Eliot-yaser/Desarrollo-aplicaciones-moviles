@@ -5,10 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import androidx.room.migration.Migration
 
 @Database(
-    entities = [Usuario::class, Asignatura::class, ObjetivoAprendizaje::class],
-    version = 1,
+    entities = [
+        Usuario::class,
+        Asignatura::class,
+        ObjetivoAprendizaje::class,
+        Recurso::class
+    ],
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -16,8 +22,49 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun asignaturaDao(): AsignaturaDao
     abstract fun objetivoDao(): ObjetivoDao
 
+    abstract fun recursoDao(): RecursoDao
+
     companion object {
         @Volatile private var INSTANCE: AppDatabase? = null
+
+        private val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
+                    """
+            CREATE TABLE IF NOT EXISTS `recursos` (
+                `id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                `titulo` TEXT NOT NULL,
+                `descripcion` TEXT NOT NULL,
+                `asignaturaId` INTEGER NOT NULL,
+                `autorId` INTEGER NOT NULL,
+                `estado` TEXT NOT NULL,
+                `observacionUtp` TEXT NOT NULL,
+                `fechaCreacion` INTEGER NOT NULL,
+                FOREIGN KEY (`autorId`)
+                    REFERENCES `usuarios` (`id`)
+                    ON UPDATE NO ACTION ON DELETE CASCADE,
+                FOREIGN KEY (`asignaturaId`)
+                    REFERENCES `asignaturas` (`id`)
+                    ON UPDATE NO ACTION ON DELETE CASCADE
+            )
+            """.trimIndent()
+                )
+
+                db.execSQL(
+                    """
+            CREATE INDEX IF NOT EXISTS `index_recursos_autorId`
+            ON `recursos` (`autorId`)
+            """.trimIndent()
+                )
+
+                db.execSQL(
+                    """
+            CREATE INDEX IF NOT EXISTS `index_recursos_asignaturaId`
+            ON `recursos` (`asignaturaId`)
+            """.trimIndent()
+                )
+            }
+        }
 
         fun get(context: Context): AppDatabase =
             INSTANCE ?: synchronized(this) {
@@ -25,7 +72,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "mpaz_pro.db"
-                ).addCallback(object : Callback() {
+                ).addMigrations(MIGRATION_1_2)
+                    .addCallback(object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
                         // Usuarios ficticios

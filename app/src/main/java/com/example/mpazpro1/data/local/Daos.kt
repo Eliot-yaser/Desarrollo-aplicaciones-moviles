@@ -31,3 +31,59 @@ interface ObjetivoDao {
     @Insert
     suspend fun insertar(objetivo: ObjetivoAprendizaje)
 }
+
+@Dao
+interface RecursoDao {
+
+    // Recursos aprobados disponibles para todos los docentes.
+    @Query("""
+        SELECT * FROM recursos
+        WHERE estado = 'APROBADO'
+        ORDER BY fechaCreacion DESC, id DESC
+    """)
+    fun publicados(): Flow<List<Recurso>>
+
+    // Cada docente podrá consultar sus propios envíos.
+    @Query("""
+        SELECT * FROM recursos
+        WHERE autorId = :autorId
+        ORDER BY fechaCreacion DESC, id DESC
+    """)
+    fun porAutor(autorId: Int): Flow<List<Recurso>>
+
+    // Recursos que UTP debe revisar.
+    @Query("""
+        SELECT * FROM recursos
+        WHERE estado = 'PENDIENTE'
+        ORDER BY fechaCreacion ASC, id ASC
+    """)
+    fun pendientes(): Flow<List<Recurso>>
+
+    @Insert
+    suspend fun insertar(recurso: Recurso): Long
+
+    // Solo permite resolver recursos que siguen pendientes.
+    @Query("""
+        UPDATE recursos
+        SET estado = :nuevoEstado,
+            observacionUtp = :observacion
+        WHERE id = :recursoId
+          AND estado = 'PENDIENTE'
+    """)
+    suspend fun resolverRevision(
+        recursoId: Int,
+        nuevoEstado: String,
+        observacion: String
+    ): Int
+
+    @Query("""
+    SELECT id, nombre
+    FROM usuarios
+    WHERE id IN (SELECT autorId FROM recursos)
+""")
+    fun autores(): Flow<List<AutorRecurso>>
+}
+data class AutorRecurso(
+    val id: Int,
+    val nombre: String
+)

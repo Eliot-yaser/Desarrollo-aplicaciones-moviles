@@ -39,6 +39,8 @@ import com.example.mpazpro1.ui.utp.EditorActividadesScreen
 import com.example.mpazpro1.ui.utp.EditorPruebaFinalScreen
 import com.example.mpazpro1.ui.utp.ReportesGeneralesScreen
 import com.example.mpazpro1.ui.utp.GestionDocentesScreen
+import com.example.mpazpro1.ui.recursos.RecursosScreen
+import com.example.mpazpro1.ui.recursos.RecursosViewModel
 
 private fun String?.primerNombre(): String = this?.trim()?.substringBefore(" ").orEmpty()
 
@@ -159,11 +161,38 @@ fun AppNavigation() {
         }
 
         composable(Rutas.RECURSOS_EDUCATIVOS) {
-            RecursosEducativosScreen(
-                onVolver = {
-                    navController.popBackStack()
+            val usuarioActual = usuario
+
+            if (
+                usuarioActual != null &&
+                (
+                        usuarioActual.rol == Roles.DOCENTE ||
+                                usuarioActual.rol == Roles.UTP
+                        )
+            ) {
+                val recursosFactory = remember(usuarioActual.id) {
+                    AppViewModelProvider.factoryRecursos(
+                        context = context,
+                        usuario = usuarioActual
+                    )
                 }
-            )
+
+                val recursosViewModel: RecursosViewModel = viewModel(
+                    key = "recursos_${usuarioActual.id}",
+                    factory = recursosFactory
+                )
+
+                RecursosScreen(
+                    viewModel = recursosViewModel,
+                    onVolver = {
+                        navController.popBackStack()
+                    }
+                )
+            } else {
+                androidx.compose.material3.Text(
+                    "Inicia sesión como Docente o UTP para acceder."
+                )
+            }
         }
 
         composable(Rutas.CONFIGURAR_PRUEBA_FINAL) {
@@ -189,6 +218,9 @@ fun AppNavigation() {
                 },
                 onGestionDocentes = {
                     navController.navigate(Rutas.GESTION_DOCENTES)
+                },
+                onRecursosEducativos = {
+                    navController.navigate(Rutas.RECURSOS_EDUCATIVOS)
                 }
             )
         }

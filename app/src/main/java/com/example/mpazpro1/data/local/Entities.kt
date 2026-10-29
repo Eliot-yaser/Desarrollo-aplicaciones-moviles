@@ -37,3 +37,50 @@ data class ObjetivoAprendizaje(
     val descripcion: String,
     val estado: String = "BORRADOR" // BORRADOR, EN_REVISION, AUTORIZADO, PUBLICADO, DESHABILITADO
 )
+
+// Estados para los recursos enviados por docentes.
+object EstadoRecurso {
+    const val PENDIENTE = "PENDIENTE"
+    const val APROBADO = "APROBADO"
+    const val RECHAZADO = "RECHAZADO"
+}
+
+@Entity(
+    tableName = "recursos",
+    foreignKeys = [
+        ForeignKey(
+            entity = Usuario::class,
+            parentColumns = ["id"],
+            childColumns = ["autorId"],
+            onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = Asignatura::class,
+            parentColumns = ["id"],
+            childColumns = ["asignaturaId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+    indices = [
+        Index("autorId"),
+        Index("asignaturaId")
+    ]
+)
+data class Recurso(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+
+    val titulo: String,
+    val descripcion: String,
+    val asignaturaId: Int,
+
+    // Cuenta que creó el recurso.
+    val autorId: Int,
+
+    val estado: String = EstadoRecurso.PENDIENTE,
+
+    // Comentario que escribe UTP al revisar.
+    val observacionUtp: String = "",
+
+    val fechaCreacion: Long = System.currentTimeMillis()
+)
